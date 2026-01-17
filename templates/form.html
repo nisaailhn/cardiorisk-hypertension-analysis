@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Risk Hesaplama • CardioRisk</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="brand">
+      <div class="brand-badge">❤</div>
+      <div>
+        <div class="brand-title">CardioRisk</div>
+        <div class="brand-sub">Hipertansiyon Risk Hesaplama</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="/">Ana Sayfa</a>
+      <a class="active" href="/form">Risk Hesaplama</a>
+      <a href="/sss">SSS</a>
+      <a href="/iletisim">İletişim</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container section">
+  <div class="card">
+    <h1>Hipertansiyon Risk Hesaplama Formu</h1>
+
+    <form action="/predict" method="POST" class="grid">
+      <div class="field">
+        <label>Yaş</label>
+        <input type="number" name="age" required>
+      </div>
+
+      <div class="field">
+        <label>Cinsiyet</label>
+        <select name="gender">
+          <option value="1">Erkek</option>
+          <option value="0">Kadın</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Dinlenme Tansiyonu</label>
+        <input type="number" name="restingBP" required>
+      </div>
+
+      <div class="field">
+        <label>Kolesterol</label>
+        <input type="number" name="serumcholestrol" required>
+      </div>
+
+      <button class="btn" type="submit">Riski Hesapla</button>
+    </form>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">© 2025 CardioRisk</div>
+</footer>
+
+</body>
+</html>

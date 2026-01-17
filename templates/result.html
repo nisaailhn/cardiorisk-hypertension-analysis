@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sonuç • CardioRisk</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="brand">
+      <div class="brand-badge">❤</div>
+      <div>
+        <div class="brand-title">CardioRisk</div>
+        <div class="brand-sub">Damar tıkanıklığı şüphesi olan bireylerde hipertansiyon riski</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="/">Ana Sayfa</a>
+      <a class="active" href="/risk">Risk Hesaplama</a>
+      <a href="/sss">SSS</a>
+      <a href="/iletisim">İletişim</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container section">
+  <div class="result-grid">
+
+    <div class="card">
+      <h1>Hipertansiyon Görülme Olasılığı</h1>
+      <p class="muted">Girilen kalp-damar bulgularına göre modelin tahmini risk sonucudur.</p>
+
+      <div class="pill" id="riskPill">{{ level }} Risk</div>
+      <div class="big">%{{ "%.2f"|format(risk) }}</div>
+
+      <div class="bar" id="riskBar" style="margin-top:12px;">
+        <div id="barFill"></div>
+      </div>
+
+      <p class="muted" id="desc" style="margin-top:12px;"></p>
+
+      <div style="margin-top:12px;">
+        <a href="/risk">← Geri dön</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Öneriler</h2>
+
+      <!-- ✅ Dinamik öneriler -->
+      <ul class="muted" style="margin:10px 0 0; padding-left:18px; display:grid; gap:8px;">
+        {% for t in tips %}
+          <li>{{ t }}</li>
+        {% endfor %}
+      </ul>
+<div class="card" style="margin-top:20px">
+    <h3>📊 Bu Sonucu Etkileyen Faktörler</h3>
+
+    <ul>
+      {% for exp in explanations %}
+        <li>{{ exp }}</li>
+      {% endfor %}
+      <p class="muted" style="font-size:13px; margin-top:10px;">
+  Açıklamalar, veri setinde hipertansiyon ile ilişkisi en belirgin ve
+  yorumlanabilir değişkenler üzerinden oluşturulmuştur.
+</p>
+
+    </ul>
+
+    <p style="font-size:13px;color:#777">
+      *Bu açıklamalar, veri seti üzerinde eğitilmiş makine öğrenmesi modelinin
+      değişken önem sıralamasına dayanmaktadır.
+    </p>
+  </div>
+      <div class="promo" style="margin-top:14px;">
+        <strong>Not</strong>
+        <p class="muted" style="margin:8px 0 0;">
+          Bu sistem eğitim amaçlıdır. Sonuçlar tıbbi teşhis yerine geçmez.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">© 2025 CardioRisk • Bilgilendirme amaçlı</div>
+</footer>
+
+<script>
+  const pct = Math.max(0, Math.min(100, Number("{{ risk }}".replace(",", "."))));
+  document.getElementById("barFill").style.width = Math.max(1, Math.min(99, pct)) + "%";
+
+  // Renk sınıfı
+  let cls = "low";
+  if (pct >= 70) cls = "high";
+  else if (pct >= 40) cls = "mid";
+
+  document.getElementById("riskPill").classList.add(cls);
+  document.getElementById("riskBar").classList.add(cls);
+
+  let text = "Mevcut bulgulara göre hipertansiyon olasılığı düşük görünmektedir.";
+  if (pct >= 70) text = "Risk faktörleri belirgin: hipertansiyon olasılığı yüksek. Düzenli takip ve uzman görüşü önerilir.";
+  else if (pct >= 40) text = "Bazı risk faktörleri mevcut: tansiyon takibi ve yaşam tarzı düzenlemeleri önerilir.";
+
+  document.getElementById("desc").textContent = text;
+</script>
+
+</body>
+</html>

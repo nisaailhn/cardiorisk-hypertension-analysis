@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Risk Hesaplama • CardioRisk</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <strong>❤ CardioRisk</strong>
+  </div>
+</header>
+
+<main class="container">
+  <section class="card">
+    <h1>Damar Tıkanıklığı Olan Bireyde Hipertansiyon Risk Analizi</h1>
+
+    <p class="muted">
+      Kalp–damar bulgularına göre hipertansiyon görülme olasılığı
+      makine öğrenmesi modeli ile tahmin edilir.
+      Sonuçlar bilgilendirme amaçlıdır.
+    </p>
+
+    <form action="/predict" method="POST" class="grid">
+      <!-- Yaş -->
+      <div class="field">
+        <label>Yaş</label>
+        <input type="number" name="age" placeholder="Örn: 55" required>
+      </div>
+
+      <!-- Cinsiyet -->
+      <div class="field">
+        <label>Cinsiyet</label>
+        <select name="gender" required>
+          <option value="1">Erkek</option>
+          <option value="0">Kadın</option>
+        </select>
+      </div>
+
+      <!-- Göğüs Ağrısı Tipi -->
+      <div class="field">
+        <label>Göğüs Ağrısı Tipi</label>
+        <select name="chestpain" required>
+          <option value="0">Tipik Anjin</option>
+          <option value="1">Atipik Anjin</option>
+          <option value="2">Anjinal Olmayan</option>
+          <option value="3">Asemptomatik</option>
+        </select>
+      </div>
+
+      <!-- Dinlenme Tansiyonu -->
+      <div class="field">
+        <label>Dinlenme Tansiyonu (mmHg)</label>
+        <input type="number" name="restingBP" placeholder="Örn: 120" required>
+      </div>
+
+      <!-- Kolesterol -->
+      <div class="field">
+        <label>Kolesterol (mg/dL)</label>
+        <input type="number" name="serumcholestrol" placeholder="Örn: 200" required>
+      </div>
+
+      <!-- Açlık Kan Şekeri -->
+      <div class="field">
+        <label>Açlık Kan Şekeri</label>
+        <select name="fastingbloodsugar" required>
+          <option value="0">Normal</option>
+          <option value="1">Yüksek</option>
+        </select>
+      </div>
+
+      <!-- EKG -->
+      <div class="field">
+        <label>Dinlenme EKG Sonucu</label>
+        <select name="restingrelectro" required>
+          <option value="0">Normal</option>
+          <option value="1">ST-T Anormalliği</option>
+          <option value="2">LVH</option>
+        </select>
+      </div>
+
+      <!-- Maksimum Nabız -->
+      <div class="field">
+        <label>Maksimum Nabız</label>
+        <input type="number" name="maxheartrate" placeholder="Örn: 150" required>
+      </div>
+
+      <!-- Egzersize Bağlı Anjin -->
+      <div class="field">
+        <label>Egzersize Bağlı Göğüs Ağrısı</label>
+        <select name="exerciseangia" required>
+          <option value="0">Hayır</option>
+          <option value="1">Evet</option>
+        </select>
+      </div>
+
+      <!-- Oldpeak -->
+      <div class="field">
+        <label>Oldpeak (ST Depresyonu)</label>
+        <input type="number" step="0.1" name="oldpeak" placeholder="Örn: 1.4" required>
+      </div>
+
+      <!-- ST Eğimi -->
+      <div class="field">
+        <label>ST Segment Eğimi</label>
+        <select name="slope" required>
+          <option value="1">Up</option>
+          <option value="2">Flat</option>
+          <option value="3">Down</option>
+        </select>
+      </div>
+
+      <!-- Ana Damar Sayısı -->
+      <div class="field">
+        <label>Ana Damar Sayısı (0–3)</label>
+        <select name="noofmajorvessels" required>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+
+      <button class="btn" type="submit">Riski Hesapla</button>
+
+    </form>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">© 2025 CardioRisk • Eğitim Amaçlı</div>
+</footer>
+
+</body>
+</html>
